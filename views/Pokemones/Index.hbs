@@ -1,0 +1,53 @@
+<main class="album py-2 bg-light"> 
+    <div class="container">
+        <div class="row">
+      {{#if hasPokemon}}
+            <div class="row">
+                <div class="col-6 mx-auto">
+                    <h4>Pokemones</h4>
+                </div>
+                <div class="col-6 text-end">
+                    <a type="button" class="btn btn-primary btn-sm" href="/pokemones/crearPokemon">
+                        Agregar pokemon
+                    </a>
+                </div>
+            </div>  
+        {{#each pokemon as |item|}}
+
+            <div class="card col-md-3 me-3 mt-2">
+                <div class="card-body">
+                    <img src="{{item.ImgaUrl}}" class="card-img-top" alt="{{item.name}}" >
+                    <h5 class="card-title">{{item.name}}</h5>                    
+                    <p class="card-text">
+                        <h6 class="card-subtitle mb-2 text-muted">{{item.pokemonType.dataValues.name}}</h6>
+                        <h6 class="card-subtitle mb-2 text-muted">{{item.region.dataValues.name}}</h6>
+                    </p>
+                    <a href="/pokemones/editarPokemon/{{item.id}}?edit=true" class="btn btn-warning">Editar</a>
+                    <a href="/pokemones/eliminarPokemon/{{item.id}}?delete=true" class="btn btn-danger">Eliminar</a>
+                </div>
+            </div>
+        {{/each}}
+
+    {{else}}
+
+        <div class="alert alert-warning" role="alert">
+            <div class="row">
+                <div class="col-6 mx-auto">
+                    Todavía no has creado ningun pokemon.
+                </div>
+                <div class="col-6 text-end">
+                    <a type="button" class="btn btn-primary btn-sm" href="/pokemones/crearPokemon">
+                        Agregar pokemon
+                    </a>
+                </div>
+            </div>   
+            <div class="row">
+                <img style="width:auto; height:20em; " class="img-fluid mx-auto" src="https://mackmediagroup.com/wp-content/uploads/2018/01/web-design.png" alt='RegionsNotFound'/>
+            </div>
+        </div>
+
+    {{/if}}
+
+    </div>
+  </div>
+</main>

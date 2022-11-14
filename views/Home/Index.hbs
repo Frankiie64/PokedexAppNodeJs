@@ -1,0 +1,53 @@
+<main class="album py-2 bg-light"> 
+    <div class="container">
+        <div class="row">
+            <div class="row m-1 mb-3">
+                <div class="col-4">
+                    <h4>Pokemones</h4>
+                </div>
+                <div class="col-7 ms-5">
+                    <form class="form-control bg-light border-0" method="post" action="/">
+                        <div class="input-group ">
+                            <input class="form-control" id="name" name="Name"  type="text" placeholder="nombre de pokemon"/>
+                            <select class="form-select" id="regionId" name="RegionId">
+                                <option selected value="0">Todas la regiones</option>
+                                {{#each region as |item|}}                             
+                                    <option value="{{item.id}}">{{item.name}}</option>
+                                {{/each}}     
+                            </select>
+                            <button class="btn btn-outline-primary" type="submit">Buscar</button>                        
+                        </div>
+                    </form>
+                </div>
+            </div>
+      {{#if hasPokemon}}              
+        {{#each pokemon as |item|}}
+            <div class="card col-md-3 me-3">
+                <div class="card-body">
+                    <img src="{{item.ImgaUrl}}" class="card-img-top" alt="{{item.name}}" >
+                    <h5 class="card-title mt-2">{{item.name}}</h5>                    
+                    <p class="card-text">
+                        <div class="bd-highlight d-flex flex-row gap-1">
+                            <div><h6 class="card-subtitle text-muted">{{item.pokemonType.dataValues.name}}</h6></div>
+                            <div><h6 class="card-subtitle text-muted"> - </h6></div>
+                            <div><h6 class="card-subtitle text-muted">{{item.region.dataValues.name}}</h6></div>
+                        </div>
+                    </p>                    
+                </div>
+            </div>
+        {{/each}}
+    {{else}}
+        <div class="alert alert-warning" role="alert">
+            <div class="row">
+                <div class="col-12 mx-auto">
+                    No se ha encontrado ningún Pokémon.
+                </div>               
+            </div>   
+            <div class="row">
+                <img style="width:auto; height:20em; " class="img-fluid mx-auto" src="https://mackmediagroup.com/wp-content/uploads/2018/01/web-design.png" alt='RegionsNotFound'/>
+            </div>
+        </div>
+    {{/if}}
+    </div>
+  </div>
+</main>

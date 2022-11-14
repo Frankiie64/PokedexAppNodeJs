@@ -1,0 +1,84 @@
+<main class="container">
+    <div class="row">
+        {{#if hasRegion}}
+        {{#if hasPokemonTypes}}
+        <div class="col-8 offset-2">
+            <div class="card">
+                <div class="card-header bg-success text-white">
+                {{#if editMode}}Edición{{else}}Creación{{/if}} de pokemon
+                </div>
+                <div class="card-body">
+                    <form method="POST" action="/pokemones/{{#if editMode}}editarPokemon{{else}}crearPokemon{{/if}}">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Nombre:</label>
+                            <input required type="text" class="form-control" id="name" name="Name" value="{{#if editMode}}{{pokemon.name}}{{/if}}" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Imagen:</label>
+                            <input required type="text" class="form-control" id="imgaUrl" name="ImgaUrl" value="{{#if editMode}}{{pokemon.ImgaUrl}}{{/if}}" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="races" class="form-label">Regiones: </label>
+                            <select required class="form-select" id="regionId" name="RegionId">
+                                {{#each region as |item|}}
+                                {{#if (isEqual item.id ../pokemon.regionId )}}
+                                    <option selected value="{{item.id}}">{{item.name}}</option>
+                                {{else}}
+                                    <option value="{{item.id}}">{{item.name}}</option>
+                                {{/if}}                     
+                                {{/each}}              
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="races" class="form-label">Tipo de pokemon: </label>
+                            <select class="form-select" id="pokemonTypeId" name="PokemonTypeId">
+                                {{#each pokemonType as |item|}}
+                                {{#if (isEqual item.id ../pokemon.pokemonTypeId )}}
+                                    <option selected value="{{item.id}}">{{item.name}}</option>
+                                {{else}}
+                                    <option value="{{item.id}}">{{item.name}}</option>
+                                {{/if}}                     
+                                {{/each}}              
+                            </select>
+                        </div>                        
+                        {{#if editMode}}
+                            <input type="hidden" name="Id" value="{{pokemon.id}}">
+                        {{/if}}
+                        <div class="row-col-12 text-end">
+                            <button type="submit" class="btn btn-primary">{{#if editMode}}Editar{{else}}Crear{{/if}}</button>
+                            <a href="/pokemones" type="button" class="btn btn-warning">volver atras</a>
+                        </div>                    
+                    </form>
+                </div>
+            </div>
+        </div>
+        {{else}}
+         <div class="alert alert-warning" role="alert">
+            <div class="row">
+                <div class="col-6 mx-auto">
+                    Todavía no has creado ningun tipo de pokemon.
+                </div>
+                <div class="col-6 text-end">
+                    <a type="button" class="btn btn-primary btn-sm" href="/tipo/pokemones/crearTipoPokemon">
+                        Agregar Tipo de pokemon
+                    </a>
+                </div>
+            </div>
+         </div>
+        {{/if}}
+        {{else}}
+         <div class="alert alert-warning" role="alert">
+            <div class="row">
+                <div class="col-6 mx-auto">
+                    Todavía no has creado ninguna región.
+                </div>
+                <div class="col-6 text-end">
+                     <a type="button" class="btn btn-primary btn-sm" href="/regiones/crearRegion">
+                        Agregar Región
+                    </a>
+                </div>
+            </div>
+         </div>
+        {{/if}}
+    </div>
+</main>
