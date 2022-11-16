@@ -5,21 +5,32 @@
                 <div class="col-4">
                     <h4>Pokemones</h4>
                 </div>
+                {{#if hasRegion}}
                 <div class="col-7 ms-5">
                     <form class="form-control bg-light border-0" method="post" action="/">
                         <div class="input-group ">
-                            <input class="form-control" id="name" name="Name"  type="text" placeholder="nombre de pokemon"/>
-                            <select class="form-select" id="regionId" name="RegionId">
-                                <option selected value="0">Todas la regiones</option>
+                            <input class="form-control border border-1 border-primary" id="name" name="Name"  type="text" placeholder="nombre de pokemon"/>                            
+                            <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">Seleccionar Región</button>
+                            <ul class="dropdown-menu dropdown-menu-end">
                                 {{#each region as |item|}}                             
-                                    <option value="{{item.id}}">{{item.name}}</option>
-                                {{/each}}     
-                            </select>
-                            <button class="btn btn-outline-primary" type="submit">Buscar</button>                        
+                                    <div class="form-check ms-3 mb-2">
+                                        <li >
+                                            <input class="form-check-input" value="{{item.id}}" type="radio" name="RegionId"
+                                                id="{{item.id}}">
+                                            <label class="form-check-label" for="{{item.id}}">
+                                                {{item.name}}
+                                            </label>
+                                        </li>  
+                                    </div>
+                                {{/each}}                                                              
+                            </ul>                              
+                            <button class="btn btn-primary" type="submit">Buscar</button>                        
                         </div>
                     </form>
                 </div>
             </div>
+        {{/if}}
       {{#if hasPokemon}}              
         {{#each pokemon as |item|}}
             <div class="card col-md-3 me-3">

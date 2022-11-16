@@ -9,7 +9,7 @@
 
                     <form method="POST" action="/regiones/{{#if editMode}}editarRegion{{else}}crearRegion{{/if}}">
                         <div class="mb-3">
-                            <label for="name" class="form-label">Nombre:</label>
+                            <label for="name" class="form-label">Nombre de la región:</label>
                             <input required type="text" class="form-control" id="name" name="Name" value="{{#if editMode}}{{region.name}}{{/if}}" />
                         </div>
                         {{#if editMode}}

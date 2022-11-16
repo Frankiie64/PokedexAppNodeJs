@@ -121,12 +121,14 @@ exports.editPokemonPost = (req, res, next) => {
     pokemonTypeId: req.body.PokemonTypeId,
   };
 
+  console.log();
+
   Pokemon.update(
     {
       name: PokemonVM.name,
       ImgaUrl: PokemonVM.ImgaUrl,
       regionId: PokemonVM.regionId,
-      pokemonType: PokemonVM.pokemonTypeId,
+      pokemonTypeId: PokemonVM.pokemonTypeId,
     },
     { where: { id: PokemonVM.id } }
   )
